@@ -1,0 +1,143 @@
+// ----------------------------------------------------------
+// OpenStreetMap bundle for easy site integration
+//
+// License: GNU General Public License version 3 or above
+//
+// TODO:
+// * Permalink need translation
+// ----------------------------------------------------------
+
+var OSMSiteBundle = {
+	// Consts
+	remote_base: '',
+
+	// Props
+	map: null,  				// map object
+	panel: null,				// panel with buttons
+	osbControl: null,			// OpenStreetBugs control
+
+	// --------   Params ------------------
+	// those are overwriten by options from init({....});
+	// use it for customization
+	params: {
+		// Centering
+		lat: 0,
+		lon: 0,
+		zoom: 16,
+
+		// Elem IDs
+		map_id: 'osmbundle-map',
+		panel_id: 'osmbundle-panel',
+
+		// Customization
+		layers: ['osm', 'google-sat', 'navitel'],
+		permalink: true,
+		openstreetbugs: true,
+		images_dir: null
+	},
+
+	// ---------- Translation pack ----------
+	// Or something like this :)
+	translation: {
+		'osm-layer': 'OSM maps',
+		'google-sat-layer': 'Satellite from Google',
+		'osb-layer': 'Errors',
+		'permalink': 'Permalink',
+		'def-ctl-title': 'Standart mouse behaviour',
+		'osb-ctl-title': 'Use this for mark errors or add new information'
+	},
+	t: function(key) { return this.translation[key] || 'Err key: ' + key; },
+
+	// ----------- Helpers ----------------
+	img_url: function(file) {
+		if (this.params[images_dir]) {
+			return this.params[images_dir] + file;
+		} else {
+			return this.remote_base + 'images/' + file;
+		}
+	},
+
+	// ------ Main initialization code -----
+	init: function(options) {
+		// Merge settings
+		for (attr in options) { this.params[attr] = options[attr]; }
+
+		// Create map and all all all
+		this.create_map();
+		this.add_layers();
+		this.add_controls();
+		this.add_panel();
+
+		this.add_OSB();
+
+		if (!this.map.getCenter())  {
+			this.map.setCenter(new OpenLayers.LonLat(this.params.lon, this.params.lat), this.params.zoom);
+		}
+
+	},
+
+	create_map: function() {
+		this.map = new OpenLayers.Map({
+										  div: this.params['map_id'],
+										  numZoomLevels: 19,
+										  controls: []
+									  });
+	},
+
+	add_layers: function() {
+		this.map.addLayer(new OpenLayers.Layer.OSM(this.t('osm-layer')));
+		this.map.addLayer(new OpenLayers.Layer.Google(this.t('google-sat-layer'),
+													  {
+														  type: google.maps.MapTypeId.SATELLITE,
+														  numZoomLevels: 19
+													  }));
+	},
+
+	add_controls: function() {
+		// Standart
+		this.map.addControl(new OpenLayers.Control.Navigation());
+		this.map.addControl(new OpenLayers.Control.PanZoomBar());
+		this.map.addControl(new OpenLayers.Control.LayerSwitcher());
+		this.map.addControl(new OpenLayers.Control.KeyboardDefaults());
+
+		// Permalink
+		if (this.params['permalink']) {
+			this.map.addControl(new OpenLayers.Control.Permalink());
+		}
+	},
+
+	add_panel: function() {
+		var defControl = new OpenLayers.Control.MouseDefaults({title : this.t('def-ctl-title')});
+
+		this.panel = new OpenLayers.Control.Panel({defaultControl: defControl});
+		this.panel.addControls([defControl]);
+		this.map.addControl(this.panel);
+	},
+
+	// OpenStreetBugs client
+	add_OSB: function() {
+		if (!this.params.openstreetbugs) return;
+
+		var bug_red = new OpenLayers.Icon("bug-red.png", new OpenLayers.Size(22, 22), new OpenLayers.Pixel(-11, -11));
+		var bug_blue = new OpenLayers.Icon("bug-blue.png", new OpenLayers.Size(22, 22), new OpenLayers.Pixel(-11, -11));
+		var bug_white = new OpenLayers.Icon("bug-white.png", new OpenLayers.Size(22, 22), new OpenLayers.Pixel(-11, -11));
+
+		var osbLayer = new OpenLayers.Layer.OpenStreetBugs(
+			this.t('osb-layer'), {
+				visibility: false,
+				iconOpen : bug_red,
+				iconClosed : bug_blue
+			});
+		this.map.addLayers([osbLayer]);
+
+		this.osbControl = new OpenLayers.Control.OpenStreetBugs(
+			osbLayer, {
+				icon : bug_red,
+				title: this.t('osb-ctl-title')
+			});
+
+		this.panel.addControls([this.osbControl]);
+		this.map.addControl(this.osbControl);
+	}
+
+};
