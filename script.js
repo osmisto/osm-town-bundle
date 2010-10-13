@@ -9,7 +9,7 @@
 
 var OSMSiteBundle = {
 	// Consts
-	remote_base: '',
+	remote_base: 'http://github.com/osmisto/osm-town-bundle/raw/master/',
 
 	// Props
 	map: null,  				// map object
@@ -30,9 +30,11 @@ var OSMSiteBundle = {
 		panel_id: 'osmbundle-panel',
 
 		// Customization
-		layers: ['osm', 'google-sat', 'navitel'],
+		layers: ['osm', 'google-sat'],
 		permalink: true,
 		openstreetbugs: true,
+
+		// Paths
 		images_dir: null
 	},
 
@@ -118,9 +120,11 @@ var OSMSiteBundle = {
 	add_OSB: function() {
 		if (!this.params.openstreetbugs) return;
 
-		var bug_red = new OpenLayers.Icon("bug-red.png", new OpenLayers.Size(22, 22), new OpenLayers.Pixel(-11, -11));
-		var bug_blue = new OpenLayers.Icon("bug-blue.png", new OpenLayers.Size(22, 22), new OpenLayers.Pixel(-11, -11));
-		var bug_white = new OpenLayers.Icon("bug-white.png", new OpenLayers.Size(22, 22), new OpenLayers.Pixel(-11, -11));
+		var size = new OpenLayers.Size(22, 22);
+		var pixel = new OpenLayers.Pixel(-11, -11);
+		var bug_red = new OpenLayers.Icon(this.image_url("bug-red.png"), size, pixel);
+		var bug_blue = new OpenLayers.Icon(this.image_url("bug-blue.png"), size, pixel);
+		var bug_white = new OpenLayers.Icon(this.image_url("bug-white.png"), size, pixel);
 
 		var osbLayer = new OpenLayers.Layer.OpenStreetBugs(
 			this.t('osb-layer'), {
