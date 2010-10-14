@@ -12,6 +12,6 @@ var OTB_init_lang = function() {
 		'osb-ctl-title'       : 'Используйте для того, чтобы отметить ошибки и новую информацию'
 	};
 
-	for (key in strs) { OSMSiteBundle.up(key, strs[key]); }
+	for (key in strs) { OSMTownBundle.up(key, strs[key]); }
 };
 OTB_init_lang();

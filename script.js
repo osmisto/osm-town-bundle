@@ -7,7 +7,7 @@
 // * Permalink need translation
 // ----------------------------------------------------------
 
-var OSMSiteBundle = {
+var OSMTownBundle = {
 	// Consts
 	remote_base: 'http://github.com/osmisto/osm-town-bundle/raw/master/',
 
