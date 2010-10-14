@@ -1,7 +1,7 @@
-// Translation for russian UTF-8
+// Translation for russian
 
 
-function() {
+var OTB_init_lang = function() {
 	var strs = {
 		'osm-layer'           : 'Карты OSM',
 		'google-sat-layer'    : 'Спутник от Google',
@@ -12,4 +12,5 @@ function() {
 	};
 
 	for (key in strs) { OSMSiteBundle.up(key, strs[key]); }
-}();
+};
+OTB_init_lang();
