@@ -49,11 +49,12 @@ var OSMSiteBundle = {
 		'osb-ctl-title': 'Use this for mark errors or add new information'
 	},
 	t: function(key) { return this.translation[key] || 'Err key: ' + key; },
+	up: function(key, str) { this.translation[key] = str; },
 
 	// ----------- Helpers ----------------
 	img_url: function(file) {
-		if (this.params[images_dir]) {
-			return this.params[images_dir] + file;
+		if (this.params.images_dir) {
+			return this.params.images_dir + file;
 		} else {
 			return this.remote_base + 'images/' + file;
 		}
@@ -122,9 +123,9 @@ var OSMSiteBundle = {
 
 		var size = new OpenLayers.Size(22, 22);
 		var pixel = new OpenLayers.Pixel(-11, -11);
-		var bug_red = new OpenLayers.Icon(this.image_url("bug-red.png"), size, pixel);
-		var bug_blue = new OpenLayers.Icon(this.image_url("bug-blue.png"), size, pixel);
-		var bug_white = new OpenLayers.Icon(this.image_url("bug-white.png"), size, pixel);
+		var bug_red = new OpenLayers.Icon(this.img_url("bug-red.png"), size, pixel);
+		var bug_blue = new OpenLayers.Icon(this.img_url("bug-blue.png"), size, pixel);
+		var bug_white = new OpenLayers.Icon(this.img_url("bug-white.png"), size, pixel);
 
 		var osbLayer = new OpenLayers.Layer.OpenStreetBugs(
 			this.t('osb-layer'), {
