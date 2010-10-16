@@ -3,6 +3,7 @@ What is this
 ============
 
 It's a easy way to embedd [OpenStreetMap](http://osm.org) + [OpenStreetBugs](http://openstreetbugs.schokokeks.org/) into any site.
+There is a [demo](http://osmisto.github.com/osm-town-bundle) where you can what can be embedded.
 
 For what? A lot of villages and towns have own small site, where residents and guests usually can find own
 news and forum for question, discussions, and so on. Some sites have satellite images without labels,
