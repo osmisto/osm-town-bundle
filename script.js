@@ -7,6 +7,18 @@
 // * Permalink need translation
 // ----------------------------------------------------------
 
+// Include all necessary libraries if needed
+function IncludeJavaScript(jsFile) {
+	document.write('<script type="text/javascript" src="' + jsFile + '"></scr' + 'ipt>');
+}
+
+if (typeof OpenLayers.Layer.OpenStreetBugs  === 'undefined')
+	IncludeJavaScript("http://osm.cdauth.eu/map/openstreetbugs.js");
+if (typeof OpenLayers.Layer.OSM.Mapnik === 'undefined')
+	IncludeJavaScript("http://openstreetmap.org/openlayers/OpenStreetMap.js");
+
+
+
 var OSMTownBundle = {
 	// Consts
 	remote_base: 'http://github.com/osmisto/osm-town-bundle/raw/master/',
@@ -46,7 +58,8 @@ var OSMTownBundle = {
 		'osb-layer': 'Errors',
 		'permalink': 'Permalink',
 		'def-ctl-title': 'Standart mouse behaviour',
-		'osb-ctl-title': 'Use this for mark errors or add new information'
+		'osb-ctl-title': 'Use this for mark errors or add new information',
+		'osm-attribution': '(C) <a target="_blank" href="http://www.openstreetmap.org">OpenStreetMap</a> and contributors, <a target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 	},
 	t: function(key) { return this.translation[key] || 'Err key: ' + key; },
 	up: function(key, str) { this.translation[key] = str; },
@@ -88,7 +101,12 @@ var OSMTownBundle = {
 	},
 
 	add_layers: function() {
-		this.map.addLayer(new OpenLayers.Layer.OSM(this.t('osm-layer')));
+		// Mapnik
+		this.map.addLayer(new OpenLayers.Layer.OSM.Mapnik(this.t('osm-layer'), {
+															  attribution: this.t('osm-attribution')
+														  }));
+
+		// Google sat
 		this.map.addLayer(new OpenLayers.Layer.Google(this.t('google-sat-layer'),
 													  {
 														  type: google.maps.MapTypeId.SATELLITE,
@@ -102,6 +120,7 @@ var OSMTownBundle = {
 		this.map.addControl(new OpenLayers.Control.PanZoomBar());
 		this.map.addControl(new OpenLayers.Control.LayerSwitcher());
 		this.map.addControl(new OpenLayers.Control.KeyboardDefaults());
+		this.map.addControl(new OpenLayers.Control.Attribution());
 
 		// Permalink
 		if (this.params['permalink']) {
