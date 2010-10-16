@@ -2,7 +2,7 @@
 What is this
 ============
 
-It's a easy way to embedd [OpenStreetMap][http://osm.org] + [OpenStreetBug][http://openstreetbugs.schokokeks.org/] into any site.
+It's a easy way to embedd [OpenStreetMap](http://osm.org) + [OpenStreetBugs](http://openstreetbugs.schokokeks.org/) into any site.
 
 For what? A lot of villages and towns have own small site, where residents and guests usually can find own
 news and forum for question, discussions, and so on. Some sites have satellite images without labels,
@@ -16,7 +16,7 @@ into the map. May be even some residents will join to OSM community to draw thei
 How to install
 ==============
 
-Instuctions and wizard is available on [our site][http://osmisto.github.com/osm-town-bundle]
+Instuctions and wizard is available on [our site](http://osmisto.github.com/osm-town-bundle)
 
 How to contibute
 ================
@@ -28,5 +28,5 @@ You even can make your site use your branch and be totally independ from me. Wit
 you can easy merge my changes to your branch and have my updates and your changes at
 the same time.
 
-If you don't want to deal with javascript, there is [Issues][http://github.com/osmisto/osm-town-bundle/issues] page
+If you don't want to deal with javascript, there is [Issues](http://github.com/osmisto/osm-town-bundle/issues) page
 where you can write your wishes.
