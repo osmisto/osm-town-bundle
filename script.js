@@ -139,6 +139,7 @@ var OSMTownBundle = {
 	// OpenStreetBugs client
 	add_OSB: function() {
 		if (!this.params.openstreetbugs) return;
+		if (!OpenLayers.Layer.OpenStreetBugs) return;
 
 		var size = new OpenLayers.Size(22, 22);
 		var pixel = new OpenLayers.Pixel(-11, -11);
