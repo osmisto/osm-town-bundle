@@ -18,14 +18,14 @@
 	or git://gitorious.org/cdauths-map/map.git.
 */
 
-OpenLayers.Layer.cdauthAddonLoaded = True;
+OpenLayers.Layer.cdauthAddonLoaded = true;
 
 /**
  * MapSurfer overlay map.
 */
 OpenLayers.Layer.cdauth.OSM.MapSurfer.Overlay = OpenLayers.Class(OpenLayers.Layer.cdauth.OSM.MapSurfer, {
 	initialize : function(name, options) {
-		options['isBaseLayer'] = False;
+		options['isBaseLayer'] = false;
 		OpenLayers.Layer.cdauth.OSM.MapSurfer.prototype.initialize.apply(this, [ name, "http://tiles1.mapsurfer.net/tms_h.ashx?x=${x}&y=${y}&z=${z}", options ]);
 	},
 	CLASS_NAME : "OpenLayers.Layer.cdauth.OSM.MapSurfer.Road"
