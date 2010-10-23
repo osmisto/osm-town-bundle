@@ -25,12 +25,9 @@ OpenLayers.Layer.cdauthAddonLoaded = true;
 */
 OpenLayers.Layer.cdauth.OSM.MapSurfer.Overlay = OpenLayers.Class(OpenLayers.Layer.cdauth.OSM.MapSurfer, {
 	initialize : function(name, options) {
-		// set isBaseLayer
-		if (!options) options = {};
-		options['isBaseLayer'] = false;
-
-		OpenLayers.Layer.cdauth.OSM.MapSurfer.prototype.initialize.apply(this, [ name, "http://tiles1.mapsurfer.net/tms_h.ashx?x=${x}&y=${y}&z=${z}", options ]);
+		OpenLayers.Layer.cdauth.OSM.MapSurfer.prototype.initialize.apply(this, [ name, "http://tiles1.mapsurfer.net/tms_h.ashx?x=${x}&y=${y}&z=${z}",
+																				 OpenLayers.Util.extend({ isBaseLayer: false }, options) ]);
 	},
-	CLASS_NAME : "OpenLayers.Layer.cdauth.OSM.MapSurfer.Road"
+	CLASS_NAME : "OpenLayers.Layer.cdauth.OSM.MapSurfer.Overlay"
 });
 
