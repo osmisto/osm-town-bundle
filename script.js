@@ -12,11 +12,17 @@ function IncludeJavaScript(jsFile) {
 	document.write('<script type="text/javascript" src="' + jsFile + '"></scr' + 'ipt>');
 }
 
-if (typeof OpenLayers.Layer.OpenStreetBugs  === 'undefined')
-	IncludeJavaScript("http://osm.cdauth.eu/map/openstreetbugs.js");
+// OpenStreetMap
 if (typeof OpenLayers.Layer.OSM.Mapnik === 'undefined')
 	IncludeJavaScript("http://openstreetmap.org/openlayers/OpenStreetMap.js");
 
+// cdauth
+if (typeof OpenLayers.Layer.cdauth === 'undefined')
+	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/prototypes.js");
+if (typeof OpenLayers.Layer.cdauthAddonLoaded === 'undefined')
+	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/addon.js");
+if (typeof OpenLayers.Layer.OpenStreetBugs  === 'undefined')
+	IncludeJavaScript("http://osm.cdauth.eu/map/openstreetbugs.js");
 
 
 var OSMTownBundle = {
@@ -27,6 +33,7 @@ var OSMTownBundle = {
 	map: null,  				// map object
 	panel: null,				// panel with buttons
 	osbControl: null,			// OpenStreetBugs control
+	overlayLayer: null,
 
 	// --------   Params ------------------
 	// those are overwriten by options from init({....});
@@ -56,6 +63,7 @@ var OSMTownBundle = {
 		'osm-layer': 'OSM maps',
 		'google-sat-layer': 'Satellite from Google',
 		'osb-layer': 'Errors',
+		'overlay-layer': 'Names',
 		'permalink': 'Permalink',
 		'def-ctl-title': 'Standart mouse behaviour',
 		'osb-ctl-title': 'Use this for mark errors or add new information',
@@ -96,7 +104,10 @@ var OSMTownBundle = {
 		this.map = new OpenLayers.Map({
 										  div: this.params['map_id'],
 										  numZoomLevels: 19,
-										  controls: []
+										  controls: [],
+										  eventListeners: {
+											  changebaselayer: this.mapBaseLayerChanged
+										  }
 									  });
 	},
 
@@ -107,11 +118,17 @@ var OSMTownBundle = {
 														  }));
 
 		// Google sat
-		this.map.addLayer(new OpenLayers.Layer.Google(this.t('google-sat-layer'),
-													  {
+		this.map.addLayer(new OpenLayers.Layer.Google(this.t('google-sat-layer'), {
 														  type: google.maps.MapTypeId.SATELLITE,
 														  numZoomLevels: 19
 													  }));
+
+		// Overlay
+		this.overlayLayer = new OpenLayers.Layer.cdauth.OSM.MapSurfer.Overlay(this.t('overlay-layer'), {
+																				  numZoomLevels: 19,
+																				  visibility: false
+																			  });
+		this.map.addLayer(this.overlayLayer);
 	},
 
 	add_controls: function() {
@@ -163,6 +180,12 @@ var OSMTownBundle = {
 
 		this.panel.addControls([this.osbControl]);
 		this.map.addControl(this.osbControl);
-	}
+	},
 
+	// -------------- Event handlers ----------------------
+	mapBaseLayerChanged: function (event) {
+		if (OSMTownBundle.overlayLayer) {
+			OSMTownBundle.overlayLayer.setVisibility(event.layer.CLASS_NAME != "OpenLayers.Layer.OSM.Mapnik");
+		}
+	}
 };
