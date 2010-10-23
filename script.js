@@ -18,16 +18,16 @@ if (typeof OpenLayers.Layer.OSM.Mapnik === 'undefined')
 
 // cdauth
 if (typeof OpenLayers.Layer.cdauth === 'undefined')
-	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/prototypes.js");
+	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/stable-1/3party/cdauth/prototypes.js");
 if (typeof OpenLayers.Layer.cdauthAddonLoaded === 'undefined')
-	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/addon.js");
+	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/stable-1/3party/cdauth/addon.js");
 if (typeof OpenLayers.Layer.OpenStreetBugs  === 'undefined')
 	IncludeJavaScript("http://osm.cdauth.eu/map/openstreetbugs.js");
 
 
 var OSMTownBundle = {
 	// Consts
-	remote_base: 'http://github.com/osmisto/osm-town-bundle/raw/master/',
+	remote_base: 'http://github.com/osmisto/osm-town-bundle/raw/stable-1/',
 
 	// Props
 	map: null,  				// map object
