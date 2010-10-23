@@ -25,7 +25,7 @@ OpenLayers.Layer.cdauthAddonLoaded = true;
 */
 OpenLayers.Layer.cdauth.OSM.MapSurfer.Overlay = OpenLayers.Class(OpenLayers.Layer.cdauth.OSM.MapSurfer, {
 	initialize : function(name, options) {
-		OpenLayers.Layer.cdauth.OSM.MapSurfer.prototype.initialize.apply(this, [ name, "http://tiles1.mapsurfer.net/tms_h.ashx?x=${x}&y=${y}&z=${z}",
+		OpenLayers.Layer.cdauth.OSM.MapSurfer.prototype.initialize.apply(this, [ name, "http://tiles3.mapsurfer.net/tms_h.ashx?x=${x}&y=${y}&z=${z}",
 																				 OpenLayers.Util.extend({ isBaseLayer: false }, options) ]);
 	},
 	CLASS_NAME : "OpenLayers.Layer.cdauth.OSM.MapSurfer.Overlay"
