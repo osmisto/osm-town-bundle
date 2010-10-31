@@ -14,7 +14,7 @@ function IncludeJavaScript(jsFile) {
 
 // OpenStreetMap
 if (typeof OpenLayers.Layer.OSM.Mapnik === 'undefined')
-	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/openstreetmap/OpenStreetMap.js");
+	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/stable-1/3party/openstreetmap/OpenStreetMap.js");
 
 // cdauth
 if (typeof OpenLayers.Layer.cdauth === 'undefined')
@@ -22,7 +22,7 @@ if (typeof OpenLayers.Layer.cdauth === 'undefined')
 if (typeof OpenLayers.Layer.cdauthAddonLoaded === 'undefined')
 	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/stable-1/3party/cdauth/addon.js");
 if (typeof OpenLayers.Layer.OpenStreetBugs  === 'undefined')
-	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/openstreetbugs.js");
+	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/stable-1/3party/cdauth/openstreetbugs.js");
 
 
 var OSMTownBundle = {
