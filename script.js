@@ -107,7 +107,13 @@ var OSMTownBundle = {
 										  controls: [],
 										  eventListeners: {
 											  changebaselayer: this.mapBaseLayerChanged
-										  }
+										  },
+										  // For V2 Google
+										  projection: new OpenLayers.Projection("EPSG:900913"),
+										  units: "m",
+										  maxResolution: 156543.0339,
+										  maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+										                                   20037508.34, 20037508.34)
 									  });
 	},
 
@@ -118,7 +124,19 @@ var OSMTownBundle = {
 														  }));
 
 		// Google sat
-		this.map.addLayer(new OpenLayers.Layer.Google(this.t('google-sat-layer'),{type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 19}));
+		if(google.maps.MapTypeId) {
+			// V3 API
+			this.gsatLayer = new OpenLayers.Layer.Google(this.t('google-sat-layer'),{
+			                                                 type: google.maps.MapTypeId.SATELLITE,
+			                                                 numZoomLevels: 19});
+		} else {
+			// old V2 API
+			this.gsatLayer = new OpenLayers.Layer.Google(this.t('google-sat-layer'),{
+			                                                 type: G_SATELLITE_MAP,
+			                                                 "sphericalMercator": true,
+			                                                 numZoomLevels: 19});
+		}
+		this.map.addLayer(this.gsatLayer);
 
 		// Overlay
 		this.overlayLayer = new OpenLayers.Layer.cdauth.OSM.MapSurfer.Overlay(this.t('overlay-layer'), {
