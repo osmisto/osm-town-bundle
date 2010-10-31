@@ -14,7 +14,7 @@ function IncludeJavaScript(jsFile) {
 
 // OpenStreetMap
 if (typeof OpenLayers.Layer.OSM.Mapnik === 'undefined')
-	IncludeJavaScript("http://openstreetmap.org/openlayers/OpenStreetMap.js");
+	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/openstreetmap/OpenStreetMap.js");
 
 // cdauth
 if (typeof OpenLayers.Layer.cdauth === 'undefined')
@@ -22,7 +22,7 @@ if (typeof OpenLayers.Layer.cdauth === 'undefined')
 if (typeof OpenLayers.Layer.cdauthAddonLoaded === 'undefined')
 	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/addon.js");
 if (typeof OpenLayers.Layer.OpenStreetBugs  === 'undefined')
-	IncludeJavaScript("http://osm.cdauth.eu/map/openstreetbugs.js");
+	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/openstreetbugs.js");
 
 
 var OSMTownBundle = {
@@ -118,10 +118,7 @@ var OSMTownBundle = {
 														  }));
 
 		// Google sat
-		this.map.addLayer(new OpenLayers.Layer.Google(this.t('google-sat-layer'), {
-														  type: google.maps.MapTypeId.SATELLITE,
-														  numZoomLevels: 19
-													  }));
+		this.map.addLayer(new OpenLayers.Layer.Google(this.t('google-sat-layer'),{type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 19}));
 
 		// Overlay
 		this.overlayLayer = new OpenLayers.Layer.cdauth.OSM.MapSurfer.Overlay(this.t('overlay-layer'), {
