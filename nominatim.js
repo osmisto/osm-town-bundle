@@ -1,7 +1,10 @@
 /* ---------------------------------------------------------------
- * Nominatim wrapper
+ * Nominatim search wrapper
  *
- * License: GNU General Public License version 3 or above
+ * Copyright 2010 osm-town-bundle contributors, released
+ * under MIT (a.k.a. X11) license.
+ * Please see: http://www.opensource.org/licenses/mit-license.php
+ * for full text of license.
  * --------------------------------------------------------------*/
 
 /**
