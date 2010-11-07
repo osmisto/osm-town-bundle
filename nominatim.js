@@ -1,3 +1,9 @@
+/* ---------------------------------------------------------------
+ * Nominatim wrapper
+ *
+ * License: GNU General Public License version 3 or above
+ * --------------------------------------------------------------*/
+
 /**
  * Nominatim -- sigleton for creating new iterators and managing them
  */
