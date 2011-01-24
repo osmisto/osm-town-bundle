@@ -14,20 +14,20 @@ function IncludeJavaScript(jsFile) {
 
 // OpenStreetMap
 if (typeof OpenLayers.Layer.OSM.Mapnik === 'undefined')
-	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/openstreetmap/OpenStreetMap.js");
+	IncludeJavaScript("http://static.osm-bundle.com/v1/3party/openstreetmap/OpenStreetMap.js");
 
 // cdauth
 if (typeof OpenLayers.Layer.cdauth === 'undefined')
-	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/prototypes.js");
+	IncludeJavaScript("http://static.osm-bundle.com/v1/3party/cdauth/prototypes.js");
 if (typeof OpenLayers.Layer.cdauthAddonLoaded === 'undefined')
-	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/addon.js");
+	IncludeJavaScript("http://static.osm-bundle.com/v1/3party/cdauth/addon.js");
 if (typeof OpenLayers.Layer.OpenStreetBugs  === 'undefined')
-	IncludeJavaScript("http://github.com/osmisto/osm-town-bundle/raw/master/3party/cdauth/openstreetbugs.js");
+	IncludeJavaScript("http://static.osm-bundle.com/v1/3party/cdauth/openstreetbugs.js");
 
 
 var OSMTownBundle = {
 	// Consts
-	remote_base: 'http://github.com/osmisto/osm-town-bundle/raw/master/',
+	remote_base: 'http://static.osm-bundle.com/v1/',
 
 	// Props
 	map: null,  				// map object
